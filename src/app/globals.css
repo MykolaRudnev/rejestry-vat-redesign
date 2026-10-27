@@ -1,0 +1,542 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Saldo · "Papier i atrament". Values and intent: docs/design-system.md */
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant touch (@media (pointer: coarse));
+@custom-variant fine (@media (pointer: fine));
+
+/* ───────────────────────── Tier 2 → utilities ─────────────────────────
+   Tier 1 primitives (--p-*) are deliberately NOT exposed here. */
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-surface-desk: var(--surface-desk);
+  --color-surface-sheet: var(--surface-sheet);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-pressed: var(--surface-pressed);
+  --color-surface-selected: var(--surface-selected);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-scrim: var(--scrim);
+
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-disabled: var(--ink-disabled);
+  --color-ink-inverse: var(--ink-inverse);
+
+  --color-line-subtle: var(--line-subtle);
+  --color-line-control: var(--line-control);
+
+  --color-accent-fill: var(--accent-fill);
+  --color-accent-fill-hover: var(--accent-fill-hover);
+  --color-accent-fill-active: var(--accent-fill-active);
+  --color-accent-knockout: var(--accent-knockout);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-ink: var(--accent-soft-ink);
+  --color-accent-line: var(--accent-line);
+  --color-accent-on-inverse: var(--accent-on-inverse);
+
+  --color-ok-fill: var(--ok-fill);
+  --color-ok-knockout: var(--ok-knockout);
+  --color-ok-soft: var(--ok-soft);
+  --color-ok-soft-ink: var(--ok-soft-ink);
+  --color-ok-border: var(--ok-border);
+  --color-wa-fill: var(--wa-fill);
+  --color-wa-knockout: var(--wa-knockout);
+  --color-wa-soft: var(--wa-soft);
+  --color-wa-soft-ink: var(--wa-soft-ink);
+  --color-wa-border: var(--wa-border);
+  --color-er-fill: var(--er-fill);
+  --color-er-fill-hover: var(--er-fill-hover);
+  --color-er-knockout: var(--er-knockout);
+  --color-er-soft: var(--er-soft);
+  --color-er-soft-ink: var(--er-soft-ink);
+  --color-er-border: var(--er-border);
+  --color-er-on-inverse: var(--er-on-inverse);
+
+  --color-focus-ring: var(--focus-ring);
+  --color-focus-ring-knockout: var(--focus-ring-knockout);
+
+  --color-viz-23: var(--viz-23);
+  --color-viz-8: var(--viz-8);
+  --color-viz-5: var(--viz-5);
+  --color-viz-0: var(--viz-0);
+  --color-viz-zw: var(--viz-zw);
+  --color-viz-np: var(--viz-np);
+
+  /* bridge: shadcn internals only — new code never uses these names */
+  --color-background: var(--surface-sheet);
+  --color-foreground: var(--ink-1);
+  --color-popover: var(--surface-overlay);
+  --color-popover-foreground: var(--ink-1);
+  --color-muted: var(--surface-sunken);
+  --color-muted-foreground: var(--ink-2);
+  --color-border: var(--line-subtle);
+  --color-ring: var(--focus-ring);
+
+  /* type */
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --text-*: initial;
+  --text-hero: var(--fs-hero);
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.025em;
+  --text-hero--font-weight: 500;
+  --text-display-1: var(--fs-display-1);
+  --text-display-1--line-height: 1.08;
+  --text-display-1--letter-spacing: -0.02em;
+  --text-display-1--font-weight: 500;
+  --text-display-2: var(--fs-display-2);
+  --text-display-2--line-height: 1.15;
+  --text-display-2--letter-spacing: -0.015em;
+  --text-display-2--font-weight: 500;
+  --text-display-3: var(--fs-display-3);
+  --text-display-3--line-height: 1.2;
+  --text-display-3--letter-spacing: -0.01em;
+  --text-display-3--font-weight: 500;
+  --text-title: var(--fs-title);
+  --text-title--line-height: 1.35;
+  --text-title--letter-spacing: -0.005em;
+  --text-title--font-weight: 600;
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-body);
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.4;
+  --text-small--letter-spacing: 0.005em;
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.2;
+  --text-micro--letter-spacing: 0.02em;
+  --text-micro--font-weight: 600;
+  --text-mono: 0.8125rem;
+  --text-mono--line-height: 1.4;
+
+  /* radius: one deliberate jump 12 → 18 → 24 */
+  --radius-*: initial;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.125rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+  --radius-full: 999px;
+
+  /* elevation */
+  --shadow-*: initial;
+  --shadow-sheet: var(--elev-sheet);
+  --shadow-raised: var(--elev-raised);
+  --shadow-overlay: var(--elev-overlay);
+  --shadow-fab: var(--elev-fab);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+  @keyframes row-flash {
+    from { background-color: var(--surface-selected); }
+    to { background-color: transparent; }
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ───────────────────────── Tier 1 · primitives ───────────────────────── */
+:root {
+  --p-paper-0: oklch(0.995 0.004 85);
+  --p-paper-50: oklch(0.976 0.011 84);
+  --p-paper-100: oklch(0.958 0.014 82);
+  --p-paper-150: oklch(0.936 0.016 80);
+  --p-paper-200: oklch(0.905 0.018 78);
+  --p-paper-300: oklch(0.86 0.02 76);
+  --p-paper-400: oklch(0.8 0.016 80);
+  --p-paper-500: oklch(0.66 0.014 78);
+
+  --p-ink-450: oklch(0.62 0.016 265);
+  --p-ink-500: oklch(0.53 0.018 265);
+  --p-ink-600: oklch(0.48 0.02 265);
+  --p-ink-700: oklch(0.4 0.024 265);
+  --p-ink-800: oklch(0.31 0.026 265);
+  --p-ink-850: oklch(0.245 0.026 265);
+  --p-ink-900: oklch(0.215 0.026 265);
+  --p-ink-925: oklch(0.185 0.022 265);
+  --p-ink-950: oklch(0.16 0.02 265);
+  --p-ink-975: oklch(0.145 0.02 265);
+
+  --p-acc-50: oklch(0.965 0.016 272);
+  --p-acc-100: oklch(0.925 0.034 272);
+  --p-acc-200: oklch(0.86 0.066 272);
+  --p-acc-300: oklch(0.77 0.114 272);
+  --p-acc-400: oklch(0.68 0.164 272);
+  --p-acc-500: oklch(0.585 0.205 272);
+  --p-acc-600: oklch(0.5 0.215 272);
+  --p-acc-700: oklch(0.43 0.19 272);
+  --p-acc-800: oklch(0.35 0.15 272);
+  --p-acc-900: oklch(0.27 0.1 272);
+
+  --p-ok-50: oklch(0.965 0.03 155);
+  --p-ok-300: oklch(0.78 0.12 155);
+  --p-ok-600: oklch(0.52 0.12 155);
+  --p-ok-700: oklch(0.44 0.1 155);
+  --p-ok-900: oklch(0.27 0.05 155);
+
+  --p-wa-50: oklch(0.97 0.025 80);
+  --p-wa-100: oklch(0.935 0.06 80);
+  --money-group-gap: 0.14em; /* Tier 3: thousands gap in <Money> */
+  --money-minor-min: 0.6875rem; /* Tier 3: 11px floor for decimals and "zł" */
+  --p-wa-300: oklch(0.83 0.14 78);
+  --p-wa-500: oklch(0.74 0.15 72);
+  --p-wa-700: oklch(0.5 0.12 58);
+  --p-wa-900: oklch(0.29 0.06 55);
+
+  --p-er-50: oklch(0.965 0.016 27);
+  --p-er-300: oklch(0.78 0.12 25);
+  --p-er-500: oklch(0.64 0.19 27);
+  --p-er-600: oklch(0.55 0.2 27);
+  --p-er-700: oklch(0.47 0.17 27);
+  --p-er-900: oklch(0.28 0.08 27);
+}
+
+/* ───────────────────────── Tier 2 · light ───────────────────────── */
+:root {
+  color-scheme: light;
+  --surface-desk: var(--p-paper-150);
+  --surface-sheet: var(--p-paper-50);
+  --surface-raised: var(--p-paper-0);
+  --surface-overlay: var(--p-paper-0);
+  --surface-sunken: var(--p-paper-100);
+  --surface-hover: var(--p-paper-100);
+  --surface-pressed: var(--p-paper-150);
+  --surface-selected: var(--p-acc-50);
+  --surface-inverse: var(--p-ink-900);
+  --scrim: oklch(0.215 0.026 265 / 0.32);
+
+  --ink-1: var(--p-ink-900);
+  --ink-2: var(--p-ink-600);
+  --ink-3: var(--p-ink-500);
+  --ink-disabled: var(--p-ink-450);
+  --ink-inverse: var(--p-paper-50);
+
+  --line-subtle: var(--p-paper-200);
+  --line-control: var(--p-ink-450);
+
+  --accent-fill: var(--p-acc-600);
+  --accent-fill-hover: var(--p-acc-700);
+  --accent-fill-active: var(--p-acc-800);
+  --accent-knockout: var(--p-paper-0);
+  --accent-text: var(--p-acc-600);
+  --accent-soft: var(--p-acc-100);
+  --accent-soft-ink: var(--p-acc-700);
+  --accent-line: var(--p-acc-300);
+  --accent-on-inverse: var(--p-acc-300);
+
+  --ok-fill: var(--p-ok-600);
+  --ok-knockout: var(--p-paper-0);
+  --ok-soft: var(--p-ok-50);
+  --ok-soft-ink: var(--p-ok-700);
+  --ok-border: var(--p-ok-300);
+  --wa-fill: var(--p-wa-500);
+  --wa-knockout: var(--p-ink-900);
+  --wa-soft: var(--p-wa-100); /* wa-50 vanished on paper-50; wa-700 on wa-100 = 5.1 */
+  --wa-soft-ink: var(--p-wa-700);
+  --wa-border: var(--p-wa-300);
+  --er-fill: var(--p-er-600);
+  --er-fill-hover: var(--p-er-700);
+  --er-knockout: var(--p-paper-0);
+  --er-soft: var(--p-er-50);
+  --er-soft-ink: var(--p-er-700);
+  --er-border: var(--p-er-300);
+  --er-on-inverse: var(--p-er-300);
+
+  --focus-ring: var(--p-acc-600);
+  --focus-ring-knockout: var(--p-paper-0);
+  --selection-bg: var(--p-acc-100);
+  --selection-ink: var(--p-ink-900);
+
+  --viz-23: var(--p-acc-600);
+  --viz-8: var(--p-acc-400);
+  --viz-5: var(--p-acc-200);
+  --viz-0: var(--p-ink-450);
+  --viz-zw: var(--p-paper-300);
+  --viz-np: var(--p-paper-200);
+
+  --elev-sheet: 0 0 0 1px oklch(0.3 0.03 70 / 0.04), 0 1px 2px oklch(0.3 0.03 70 / 0.05);
+  --elev-raised: 0 1px 2px oklch(0.3 0.03 70 / 0.06), 0 8px 24px -8px oklch(0.3 0.03 70 / 0.14);
+  --elev-overlay: 0 2px 6px oklch(0.25 0.03 70 / 0.06), 0 24px 64px -16px oklch(0.25 0.03 70 / 0.24);
+  --elev-fab: 0 6px 20px -6px oklch(0.5 0.215 272 / 0.45);
+}
+
+/* ───────────────────────── Tier 2 · dark: ink becomes paper ───────────────────────── */
+.dark {
+  color-scheme: dark;
+  --surface-desk: var(--p-ink-950);
+  --surface-sheet: var(--p-ink-925);
+  --surface-raised: var(--p-ink-900);
+  --surface-overlay: var(--p-ink-850);
+  --surface-sunken: var(--p-ink-950);
+  --surface-hover: var(--p-ink-900);
+  --surface-pressed: var(--p-ink-850);
+  --surface-selected: var(--p-acc-900);
+  --surface-inverse: var(--p-paper-100);
+  --scrim: oklch(0.145 0.02 265 / 0.64);
+
+  --ink-1: var(--p-paper-100);
+  --ink-2: var(--p-paper-400);
+  --ink-3: var(--p-paper-500);
+  --ink-disabled: var(--p-ink-600);
+  --ink-inverse: var(--p-ink-900);
+
+  --line-subtle: var(--p-ink-800);
+  --line-control: var(--p-ink-450);
+
+  --accent-fill: var(--p-acc-300);
+  --accent-fill-hover: var(--p-acc-200);
+  --accent-fill-active: var(--p-acc-400);
+  --accent-knockout: var(--p-ink-975);
+  --accent-text: var(--p-acc-300);
+  --accent-soft: var(--p-acc-900);
+  --accent-soft-ink: var(--p-acc-200);
+  --accent-line: var(--p-acc-700);
+  --accent-on-inverse: var(--p-acc-700);
+
+  --ok-fill: var(--p-ok-300);
+  --ok-knockout: var(--p-ink-975);
+  --ok-soft: var(--p-ok-900);
+  --ok-soft-ink: var(--p-ok-300);
+  --ok-border: var(--p-ok-700);
+  --wa-fill: var(--p-wa-300);
+  --wa-knockout: var(--p-ink-975);
+  --wa-soft: var(--p-wa-900);
+  --wa-soft-ink: var(--p-wa-300);
+  --wa-border: var(--p-wa-700);
+  --er-fill: var(--p-er-300);
+  --er-fill-hover: var(--p-er-500);
+  --er-knockout: var(--p-ink-975);
+  --er-soft: var(--p-er-900);
+  --er-soft-ink: var(--p-er-300);
+  --er-border: var(--p-er-700);
+  --er-on-inverse: var(--p-er-700);
+
+  --focus-ring: var(--p-acc-300);
+  --focus-ring-knockout: var(--p-ink-975);
+  --selection-bg: var(--p-acc-900);
+  --selection-ink: var(--p-paper-100);
+
+  --viz-23: var(--p-acc-300);
+  --viz-8: var(--p-acc-500);
+  --viz-5: var(--p-acc-700);
+  --viz-0: var(--p-ink-600);
+  --viz-zw: var(--p-ink-700);
+  --viz-np: var(--p-ink-800);
+
+  --elev-sheet: inset 0 1px 0 oklch(1 0 0 / 0.04);
+  --elev-raised: inset 0 1px 0 oklch(1 0 0 / 0.05), 0 8px 24px -8px oklch(0 0 0 / 0.5);
+  --elev-overlay: inset 0 1px 0 oklch(1 0 0 / 0.06), 0 24px 64px -16px oklch(0 0 0 / 0.7);
+  --elev-fab: 0 6px 20px -6px oklch(0 0 0 / 0.6);
+}
+
+/* ───────────────────────── Tier 3 · layout, type sizes, motion ───────────────────────── */
+:root {
+  /* type: clamp steps linearly between 768 and 1024 (docs §4) */
+  --fs-hero: clamp(3rem, calc(3rem + (100vw - 48rem) * 0.09375), 4.5rem);
+  --fs-display-1: clamp(1.75rem, calc(1.75rem + (100vw - 48rem) * 0.046875), 2.5rem);
+  --fs-display-2: clamp(1.5rem, calc(1.5rem + (100vw - 48rem) * 0.015625), 1.75rem);
+  --fs-display-3: clamp(1.25rem, calc(1.25rem + (100vw - 48rem) * 0.0078125), 1.375rem);
+  --fs-title: 1rem;
+  --fs-body: 1rem;
+  --lh-body: 1.45;
+
+  --gutter: 1rem;
+  --stack-section: 1.75rem;
+  --stack-group: 1rem;
+  --stack-tight: 0.25rem;
+  --row-h: 4rem;
+  --control-h: 2.75rem;
+  --sidebar-w: 15.5rem;
+  --rail-w: 4.5rem;
+  --sheet-inset: 0.5rem;
+  --panel-w: 30rem;
+  --panel-w-form: 35rem;
+  --content-max: 70rem;
+
+  --dur-press: 80ms;
+  --dur-fast: 140ms;
+  --dur-base: 200ms;
+  --dur-slow: 280ms;
+  --dur-drawer: 400ms;
+  --dur-flash: 1200ms;
+}
+@media (min-width: 768px) {
+  :root {
+    --gutter: 1.5rem;
+    --stack-section: 2.5rem;
+    --stack-group: 1.25rem;
+    --row-h: 3.5rem;
+    --control-h: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --fs-title: 0.9375rem;
+    --fs-body: 0.9375rem;
+    --lh-body: 1.5;
+    --gutter: 3rem;
+    --stack-section: 3rem;
+    --stack-group: 1.5rem;
+    --stack-tight: 0.375rem;
+  }
+}
+@media (pointer: coarse) {
+  :root {
+    --control-h: 2.75rem;
+  }
+}
+
+/* ───────────────────────── base ───────────────────────── */
+@layer base {
+  * {
+    border-color: var(--line-subtle);
+  }
+  html {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--surface-desk);
+    color: var(--ink-1);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-ink);
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  @media (pointer: coarse) {
+    input,
+    textarea,
+    select {
+      font-size: 1rem;
+    }
+  }
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+@utility pnum {
+  font-variant-numeric: proportional-nums lining-nums;
+}
+@utility focus-knockout {
+  &:focus-visible {
+    outline-color: var(--focus-ring-knockout);
+  }
+}
+@utility skeleton {
+  background: var(--surface-pressed); /* sunken was 1.04:1 on sheet */
+  border-radius: var(--radius-xs);
+  animation: skeleton-pulse 1.6s var(--ease-in-out) infinite;
+}
+@utility row-flash {
+  animation: row-flash var(--dur-flash) var(--ease-out);
+}
+/* ledger-line field (docs §8 Inputs) */
+@utility ledger {
+  background: var(--surface-sunken);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: inset 0 -1px 0 var(--line-control);
+  transition: box-shadow var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+  &:hover { box-shadow: inset 0 -1px 0 var(--ink-2); }
+  &:focus-visible, &:focus-within:has(:focus-visible) { box-shadow: inset 0 -2px 0 var(--focus-ring); }
+  &[aria-invalid="true"][aria-invalid], &:has([aria-invalid="true"]):has([aria-invalid]) { box-shadow: inset 0 -2px 0 var(--er-soft-ink); }
+  &:disabled, &[data-disabled] { background: transparent; box-shadow: inset 0 -1px 0 var(--line-subtle); cursor: not-allowed; }
+  &:is(input, textarea):read-only, &[data-readonly] { background: transparent; box-shadow: none; }
+}
+/* amount typography (docs §8 Amount formatting) */
+@utility money-group {
+  margin-inline-start: var(--money-group-gap);
+}
+@utility money-minor-hero {
+  font-size: max(0.5em, var(--money-minor-min));
+}
+@utility money-minor-display {
+  font-size: max(0.6em, var(--money-minor-min));
+}
+@utility money-unit-hero {
+  font-size: max(0.3em, var(--money-minor-min));
+  margin-inline-start: 0.15em;
+}
+@utility money-unit-display {
+  font-size: max(0.45em, var(--money-minor-min));
+  margin-inline-start: 0.15em;
+}
+@utility rise-in {
+  animation: rise-in var(--dur-base) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 120ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton {
+    animation: none !important;
+    opacity: 0.7;
+  }
+  .rise-in {
+    animation-name: fade-in-only !important;
+  }
+}
+@keyframes fade-in-only {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* toasts never cover footer actions (Considerations 16): clear an open side panel / phone drawer footer */
+body:has([data-slot="sheet-content"]) [data-sonner-toaster][data-x-position="right"] {
+  right: calc(var(--panel-w-form) + 24px) !important;
+}
+body:has([data-vaul-drawer]) [data-sonner-toaster] {
+  bottom: calc(88px + env(safe-area-inset-bottom)) !important;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}
